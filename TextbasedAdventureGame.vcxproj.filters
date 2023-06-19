@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Backend">
+      <UniqueIdentifier>{0820d3ea-c333-420b-ae07-81a515d1d774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{b8703dae-ff1a-4c93-8fd1-c04d8a6071d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Backend">
+      <UniqueIdentifier>{31ad3d27-6b32-47f9-a458-382d41b69dd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{a3a521a4-b32d-43e9-8c4c-8b62bfceea89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Items">
+      <UniqueIdentifier>{75403ab1-2ed2-4339-9a9b-d71c03cbb026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{9d60b7ee-dc4d-4e2e-8569-070f12607ba5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Backups">
+      <UniqueIdentifier>{17ce164f-3632-4d39-bfd1-a8c4b6c2c5fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Gameplay Files">
+      <UniqueIdentifier>{f8320f7f-0db5-4c3f-b3a1-9e839459f2da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Notes">
+      <UniqueIdentifier>{e96a81e8-bd84-45d7-beca-bca4cf825e73}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Armor.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="ContextMenu.hpp">
+      <Filter>Header Files\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCommand.hpp">
+      <Filter>Header Files\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.hpp">
+      <Filter>Header Files\Backend</Filter>
+    </ClCompile>
+    <ClCompile Include="LootTable.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameObject.hpp">
+      <Filter>Header Files\Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.hpp">
+      <Filter>Header Files\Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.hpp">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.hpp">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.hpp">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemType.hpp">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Armor.hpp">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="EncounterType.hpp">
+      <Filter>Header Files\Backend</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemRarity.hpp">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="LootTable.hpp">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Devlog-Backup-06-18-2023.txt">
+      <Filter>Resource Files\Backups</Filter>
+    </Text>
+    <Text Include="WeaponList.txt">
+      <Filter>Resource Files\Gameplay Files</Filter>
+    </Text>
+    <Text Include="bugs.txt">
+      <Filter>Resource Files\Notes</Filter>
+    </Text>
+    <Text Include="devlog.txt">
+      <Filter>Resource Files\Notes</Filter>
+    </Text>
+    <Text Include="todo.txt">
+      <Filter>Resource Files\Notes</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Users\calet\OneDrive\Pictures\TextAdventureGameFSM.png">
+      <Filter>Resource Files\Notes</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,1 @@
+- Lower weapon rarities may still have higher damage than rarer ones since the % change range (20%) is greater than the multipliers (0-1.2)

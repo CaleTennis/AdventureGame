@@ -1,0 +1,115 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/09/2023:
+- added Enemy class
+- automatically adds experience to player on death
+- main player object is now set up, statically accessible through GameObject
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/11/2023:
+- added context menu system, including:
+	- Start menu
+	- Game Menu
+	- Battle Menu (not set up)
+	- Statistics Menu
+- Fixed problem of random enter key presses screwing up display spacing
+- cleaned up enumerations to prevent duplicate enumeration names and so they better describe their functions
+- added player statistics
+- added player gold (no functionality yet)
+- Up to ~700 total lines of code
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/12/2023
+- added basic item / weapon classes.
+- Reformatted codebase to end private variables with an underscore
+- Converted enum files from .cpp to .hpp for cleaner coding practice
+- Switched stat vars to const (type) & (name) = (name)_ to reduce boilerplate in display areas
+- Removed need for tracking curser position by hard resetting the cursor position every display update cycle
+- Added simple inventory menu
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/14/2023
+- switched all header files from #pragma once to #ifndef/#define guards
+- Added default weapon mode for testing until item list is created
+- Built out basic battle functionality:
+	- New enemies generated via random chance encounters when exploring
+	- Enemy levels have a 33% chance of being higher, lower, or the same as the player
+	- Can either attack or run (100% accuracy on both for now)
+	- fixed display so it updates experience gain for killed enemies instantly, not delayed until next action
+	- Enemies have a weapon slot, though it is currently not being used until an item list is created to generate loot tables with.
+	- Enemies now give player incremental gold on death
+- Changed menus to use char options instead of strings
+- Since menus only need one character, changed input to be instant on keypress since the first char is the only needed char
+- Added new stats
+	- total number of actions taken
+	- total number of enemies slain
+- Dealt with the absolutely horrible errors and debugging caused by a missing break; statement in the CMD switch.
+- Fixed player action stat so that it tracks non GUI related tasks and not total commands given.
+- Up to ~880 lines of code (including whitespace)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/15/2023
+- Simple text file weapon list implemented
+	- List of 10 weapon names
+	- Delineated by \n
+	- Automatically loaded into weapon class
+- Player default weapon is now fists
+- Fist damage now scales to player level
+- Converted Random class into a purely static class (no real need for instances)
+- Removed some const declarations after getters since they were being used to reassign values outside of their function body
+- Added Player Weapon Inventory
+- Enemies automatically add random weapon with scaled damage to player inventory on death
+- Added items collected player statistic
+- Added backpack capacity
+- fixed backpack display so weapon damages are properly aligned
+- Added HUD messages to show when at max health and when the inventory is full
+- Cleaned up quitting messages so that exit message is centered and clears screen beforehand properly
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/16/2023
+- implemented expandable file format for future hard-coding of static game objects (Weapons, armor, entities, etc)
+- Added 6-tier rarity system, ranging from Junk to Artifacts
+- Weapons now have drop rates adjusted for their rarity
+- Inventory display is now bordered with a box
+- Inventory now marks the currently selected item with an asterisk * 
+- Can now discard and equip new weapons
+- Inventory display automatically updates and no longer shows unnecessary controls when there are no items in the inventory
+- Up to ~1,393 lines of code (including whitespace and most comments)
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+06/18/2023
+- Weapons now have an accuracy rating (0%-100%)
+- If a player lands attack (based on weapon accuracy rating and player accuracy modifier), 50% chance of a perfect strike (100% dmg) or a glancing blow (50% dmg)
+- Modified weapon storage so that weapons added to inventory copy master list weapons rather than using them
+- Enemy health now scales linearly with their level
+- Updated backpack display to mark currently equipped items on the sidebar
+- Inventory now displays fists when no item is equipped
+- Removed experience for exploring, now only dropped by defeating enemies
+- Resting now heals 100% of health, improving overall gameplay
+- Added weapon levels
+- Weapon damage is now calculated through player level and rarity with a predefined range of randomness
+- Can no longer discard equipped weapon
+- Fixed memory leak caused by running away from enemies
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------

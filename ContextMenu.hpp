@@ -1,0 +1,12 @@
+#ifndef __CONTEXTMENU_HPP__
+#define __CONTEXTMENU_HPP__
+
+enum ContextMenu {
+	START_MENU,
+	GAME_MENU,
+	INVENTORY_MENU,
+	BATTLE_MENU,
+	STATS_MENU
+};
+
+#endif

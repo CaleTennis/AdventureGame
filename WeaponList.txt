@@ -1,0 +1,11 @@
+Leather Shoe,Junk
+Small Sword,Common
+Medium Sword,Common
+Large Sword,Unusual
+Scythe,Unusual
+Logging Axe,Common
+Battle Axe,Unusual
+Short Spear,Common
+Obsidian Knife,Rare
+Flaming Rubber Ducky,Mythical
+Demonic Dildo of Destruction,Artifact
