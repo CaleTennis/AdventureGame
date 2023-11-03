@@ -25,7 +25,7 @@ private:
 
 public:
     Weapon(); // Default weapon, fists
-    Weapon(std::string weaponName, std::string weaponRarity);
+    Weapon(std::wstring weaponName, std::wstring weaponRarity);
     ~Weapon();
 
     static std::vector<Weapon*> weaponList;

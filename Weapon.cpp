@@ -4,12 +4,12 @@
 
 std::vector<Weapon*> Weapon::weaponList;
 
-Weapon::Weapon(std::string weaponName, std::string weaponRarity)
+Weapon::Weapon(std::wstring weaponName, std::wstring weaponRarity)
 {
 	setType(ITEM_WEAPON);
 	setRarity(weaponRarity);
 	//setDamage(weaponDamage);
-	setName(weaponName);
+	setWName(weaponName);
 	return;
 }
 
@@ -24,8 +24,8 @@ bool Weapon::initWeaponList()
 		RARITY
 	} currentWeaponInitState = NAME;
 
-	std::string weaponName = "";
-	std::string weaponRarity = "";
+	std::wstring weaponName = L"";
+	std::wstring weaponRarity = L"";
 	
 	char nextChar = '\0';
 
@@ -39,8 +39,8 @@ bool Weapon::initWeaponList()
 			if (nextChar == '\n')
 			{
 				Weapon::weaponList.push_back(new Weapon(weaponName, weaponRarity));
-				weaponName = "";
-				weaponRarity = "";
+				weaponName = L"";
+				weaponRarity = L"";
 				currentWeaponInitState = NAME;
 			}
 			else if (nextChar == ',')

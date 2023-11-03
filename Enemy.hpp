@@ -7,6 +7,11 @@
 #include "Weapon.hpp"
 #include "LootTable.hpp"
 
+class Player;
+class Entity;
+class Display;
+class GameObject;
+
 class Enemy : public Entity
 {
 private:

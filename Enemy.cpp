@@ -15,7 +15,9 @@ Enemy::Enemy()
 	if (getLevel() == 0)
 		setLevel(1);
 
-	setName("Level " + std::to_string(getLevel()) + " Enemy");
+	std::string tmpStr = "";
+	tmpStr.append("Level: " + std::to_string(getLevel()) + " Enemy");
+	setWName(std::wstring(tmpStr.begin(), tmpStr.end()));
 	setHealth(setMaxHealth((getLevel() * (ENEMY_HEALTH_GROWTH_RATE - 1)) + 100.0f));
 	
 	expRewardOnDeath_ = (long long)25 * (long long)getLevel();

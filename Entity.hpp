@@ -11,6 +11,7 @@ private:
 	float health_;
 	float maxHealth_;
 	int level_;
+	std::wstring wname_;
 	std::string name_;
 	int entityID_;
 	static int entityCount_;
@@ -35,6 +36,9 @@ public:
 	int setLevel(int l);
 	int levelUp();
 	int multiLevelUp(int n);
+
+	std::wstring getWName() const { return wname_; }
+	std::wstring setWName(std::wstring n);
 
 	std::string getName() const;
 	std::string setName(std::string n);

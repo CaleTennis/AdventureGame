@@ -40,6 +40,12 @@
     <Filter Include="Resource Files\Notes">
       <UniqueIdentifier>{e96a81e8-bd84-45d7-beca-bca4cf825e73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Backend\Utilities">
+      <UniqueIdentifier>{4a4c4764-73a4-434c-afeb-2279e55fa89a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Backend\Data Types">
+      <UniqueIdentifier>{2a9ee106-6344-4d7b-a50c-51505b409e90}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,9 +60,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Source Files\Backend</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
@@ -69,17 +72,23 @@
     <ClCompile Include="Armor.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="ContextMenu.hpp">
-      <Filter>Header Files\Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="GameCommand.hpp">
-      <Filter>Header Files\Backend</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.hpp">
-      <Filter>Header Files\Backend</Filter>
-    </ClCompile>
     <ClCompile Include="LootTable.cpp">
       <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Source Files\Backend\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="ContextMenu.hpp">
+      <Filter>Header Files\Backend\Data Types</Filter>
+    </ClCompile>
+    <ClCompile Include="GameCommand.hpp">
+      <Filter>Header Files\Backend\Data Types</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.hpp">
+      <Filter>Header Files\Backend\Data Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Source Files\Backend</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,14 +119,17 @@
     <ClInclude Include="Armor.hpp">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="EncounterType.hpp">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
     <ClInclude Include="ItemRarity.hpp">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="LootTable.hpp">
       <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="EncounterType.hpp">
+      <Filter>Header Files\Backend\Data Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Display.hpp">
+      <Filter>Header Files\Backend</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

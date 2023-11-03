@@ -9,6 +9,7 @@ Entity::Entity()
 	maxHealth_ = health_;
 	level_ = 1;
 	name_ = "entity";
+	wname_ = L"entity";
 	entityCount_++;
 	entityID_ = entityCount_;
 	entityList_.push_back(this);
@@ -33,6 +34,7 @@ float Entity::getHealth() const
 
 float Entity::setHealth(float h)
 {
+	
 	health_ = h;
 	if (health_ <= 0)
 		die();
@@ -43,6 +45,7 @@ float Entity::setHealth(float h)
 
 float Entity::updateHealth(float dh)
 {
+	
 	health_ += dh;
 	if (health_ <= 0)
 		die();
@@ -59,6 +62,7 @@ float Entity::getMaxHealth() const
 
 float Entity::setMaxHealth(float h)
 {
+	
 	maxHealth_ = h;
 	if (health_ > maxHealth_)
 		health_ = maxHealth_;
@@ -69,6 +73,7 @@ float Entity::setMaxHealth(float h)
 
 float Entity::updateMaxHealth(float dh)
 {
+	
 	maxHealth_ += dh;
 	if (health_ > maxHealth_)
 		health_ = maxHealth_;
@@ -84,21 +89,30 @@ int Entity::getLevel() const
 
 int Entity::setLevel(int l)
 {
+	
 	level_ = l;
 	return level_;
 }
 
 int Entity::levelUp()
 {
+	
 	return ++level_;
 }
 
 int Entity::multiLevelUp(int n)
 {
+	
 	level_ += n;
 	return level_;
 }
 
+std::wstring Entity::setWName(std::wstring n)
+{
+	wname_ = n;
+	name_ = std::string(wname_.begin(), wname_.end());
+	return wname_;
+}
 
 std::string Entity::getName() const
 {
@@ -108,6 +122,7 @@ std::string Entity::getName() const
 std::string Entity::setName(std::string n)
 {
 	name_ = n;
+	wname_ = std::wstring(name_.begin(), name_.end());
 	return name_;
 }
 

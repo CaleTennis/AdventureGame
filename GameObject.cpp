@@ -3,10 +3,124 @@
 
 Player GameObject::player = Player();
 Enemy* GameObject::currentEnemy = nullptr;
+bool GameObject::isGameOver = false;
+int GameObject::currentInventoryItemIndex = 1;
+GameState GameObject::state = STATE_SETUP;
+
+LRESULT CALLBACK GameObject::WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	LRESULT lResult = 0;
+
+	switch (uMsg)
+	{
+	case WM_COMMAND: {
+		switch (LOWORD(wParam))
+		{
+		case title_start_label: {
+			OutputDebugString(L"Switching to game menu...\n");
+			Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
+			Display::getInstance().updateMenuScreen();
+		} break;
+		case title_quit_label: {
+			OutputDebugString(L"Exiting game...");
+			forceCloseGame();
+			CloseWindow(hWnd);
+		} break;
+		case game_explore_label: {
+			GameObject::player.totalActions++;
+
+			if (GameObject::player.explore() == ET_BATTLE)
+			{
+				currentEnemy = new Enemy();
+				Display::getInstance().setCurrentMenu(ContextMenu::BATTLE_MENU);
+				Display::getInstance().updateMenuScreen();
+			}
+		} break;
+		case game_rest_label: {
+			GameObject::player.totalActions++;
+			GameObject::player.rest();
+		} break;
+		case game_exit_label: {
+			OutputDebugString(L"Quitting to title screen...\n");
+			Display::getInstance().setCurrentMenu(ContextMenu::START_MENU);
+			Display::getInstance().updateMenuScreen();
+		} break;
+		case game_open_inventory_label: {
+			Display::getInstance().setCurrentMenu(ContextMenu::INVENTORY_MENU);
+			Display::getInstance().updateMenuScreen();
+		} break;
+
+		case inventory_listbox_label: {
+			switch (HIWORD(wParam))
+			{
+			case LBN_SELCHANGE: {
+				Display::hasSelectedInventoryItem = true;
+				Display::getInstance().updateCurrentInventorySelection();
+				Display::getInstance().repaint();
+
+			} break;
+			default: {} break;
+			}
+		} break;
+
+		case inventory_close_label: {
+			Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
+			Display::getInstance().updateMenuScreen();
+			Display::hasSelectedInventoryItem = false;
+		} break;
+		case battle_attack_label: {
+			GameObject::player.totalActions++;
+
+			GameObject::currentEnemy->updateHealth(-GameObject::player.getAttackDamage());
+			GameObject::player.takeDamage(GameObject::currentEnemy->getDamage());
+
+			if (!GameObject::currentEnemy->isAlive()) {
+				delete currentEnemy;
+				Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
+				Display::getInstance().updateMenuScreen();
+			}
+		} break;
+		case battle_run_label: {
+			GameObject::player.totalActions++;
+			delete currentEnemy;
+			Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
+			Display::getInstance().updateMenuScreen();
+		} break;
+		default: { 
+			if (currentEnemy != nullptr) currentEnemy = nullptr;
+		} break;
+		}
+		Display::getInstance().repaint();
+	} break;
+	case WM_CLOSE:
+	{
+		OutputDebugString(L"Processing Window Close event...\n");
+		forceCloseGame();
+		CloseWindow(hWnd);
+	} break;
+	case WM_DESTROY:
+	{
+		OutputDebugString(L"Processing Window Destroy event...\n");
+		forceCloseGame();
+		PostQuitMessage(NULL);
+		return 0;
+	} break;
+	case WM_PAINT:
+	{
+		OutputDebugString(L"Processing Window Paint event...\n");
+		Display::getInstance().paint();
+	} break;
+	default:
+	{
+		lResult = DefWindowProc(hWnd, uMsg, wParam, lParam);
+	} break;
+	}
+
+	return lResult;
+}
 
 void GameObject::setup()
 {
-	GameObject::currentCmd = GameCommand::CMD_BLANK;
 
 	if (!Weapon::initWeaponList())
 	{
@@ -17,12 +131,48 @@ void GameObject::setup()
 	}
 
 	GameObject::player.setup(); 
-	GameObject::player.setName("Player");
+	GameObject::player.setWName(L"Player");
 
 	GameObject::state = GameState::STATE_UPDATE_DISPLAY;
 	return;
 }
 
+void GameObject::gameOver()
+{
+	GameObject::isGameOver = true;
+	return;
+}
+
+Player* GameObject::getPlayer()
+{
+	return &GameObject::player;
+}
+
+void GameObject::inventoryMoveSelectionUp()
+{
+	if (GameObject::currentInventoryItemIndex <= 1)
+		GameObject::currentInventoryItemIndex = 1;
+	else
+		GameObject::currentInventoryItemIndex--;
+}
+
+void GameObject::inventoryMoveSelectionDown()
+{
+	if (GameObject::currentInventoryItemIndex >= GameObject::player.getWeaponInventory()->size())
+		GameObject::currentInventoryItemIndex = GameObject::player.getWeaponInventory()->size();
+	else
+		GameObject::currentInventoryItemIndex++;
+
+}
+
+void GameObject::forceCloseGame()
+{
+	GameObject::isGameOver = true;
+	GameObject::state = GameState::STATE_GAME_OVER;
+
+	return;
+}
+/*
 void GameObject::getInput()
 {
 	clock_t startTime = clock();
@@ -51,7 +201,7 @@ void GameObject::parseInput()
 
 void GameObject::validateInput()
 {
-	switch (GameObject::currentMenu) {
+	switch (Display::getInstance().getCurrentMenu()) {
 
 	case ContextMenu::START_MENU: {
 		if (GameObject::inputChar == '1')
@@ -139,7 +289,7 @@ void GameObject::processEvents()
 		GameObject::state = GameState::STATE_UPDATE_DISPLAY;
 	} break;
 	case GameCommand::CMD_START_GAME: {
-		GameObject::currentMenu = ContextMenu::GAME_MENU;
+		Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
 	} break;
 	case GameCommand::CMD_EXPLORE: {
 		GameObject::player.totalActions++;
@@ -148,7 +298,8 @@ void GameObject::processEvents()
 		if (et == ET_NOTHING)
 			break;
 		else if (et == ET_BATTLE) {
-			GameObject::currentMenu = ContextMenu::BATTLE_MENU;
+			Display::getInstance().setCurrentMenu(ContextMenu::BATTLE_MENU);
+
 			GameObject::currentEnemy = new Enemy;
 		}
 	} break;
@@ -163,11 +314,11 @@ void GameObject::processEvents()
 	
 	// Inventory
 	case GameCommand::CMD_ENTER_INV: {
-		GameObject::currentMenu = ContextMenu::INVENTORY_MENU;
+		Display::getInstance().setCurrentMenu(ContextMenu::INVENTORY_MENU);
 	} break;
 
 	case GameCommand::CMD_EXIT_INV: {
-		GameObject::currentMenu = ContextMenu::GAME_MENU;
+		Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
 	} break;
 	case GameCommand::CMD_INV_UP:{
 		inventoryMoveSelectionUp();
@@ -190,10 +341,11 @@ void GameObject::processEvents()
 
 	// Stats
 	case GameCommand::CMD_ENTER_STATS_MENU: {
-		GameObject::currentMenu = ContextMenu::STATS_MENU;
+		Display::getInstance().setCurrentMenu(ContextMenu::STATS_MENU);
 	} break;
 	case GameCommand::CMD_EXIT_STATS_MENU: {
-		GameObject::currentMenu = ContextMenu::GAME_MENU;
+		Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
+		;
 	} break;
 
 	// Battle
@@ -203,14 +355,14 @@ void GameObject::processEvents()
 		GameObject::currentEnemy->updateHealth(-GameObject::player.getAttackDamage());
 		GameObject::player.takeDamage(GameObject::currentEnemy->getDamage());
 		if (!GameObject::currentEnemy->isAlive()) {
-			GameObject::currentMenu = ContextMenu::GAME_MENU;
+			Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
 			delete currentEnemy;
 		}
 	} break;
 	case GameCommand::CMD_BATTLE_RUN: {
 		GameObject::player.totalActions++;
 		delete currentEnemy;
-		GameObject::currentMenu = ContextMenu::GAME_MENU;
+		Display::getInstance().setCurrentMenu(ContextMenu::GAME_MENU);
 	} break;
 
 	default: {} break;
@@ -242,7 +394,7 @@ void GameObject::updateDisplay()
 		printf("\u001b[F");
 	}
 
-	switch (GameObject::currentMenu)
+	switch (Display::getInstance().getCurrentMenu())
 	{
 	case ContextMenu::START_MENU: {
 		printf("\t\t\t\t\t\tPlease select an option:\n");
@@ -385,31 +537,4 @@ void GameObject::fullCleanup()
 	GameObject::state = GameState::STATE_GAME_OVER;
 	return;
 }
-
-void GameObject::gameOver()
-{
-	GameObject::isGameOver = true;
-	return;
-}
-
-Player* GameObject::getPlayer()
-{
-	return &GameObject::player;
-}
-
-void GameObject::inventoryMoveSelectionUp()
-{
-	if (GameObject::currentInventoryItemIndex <= 1)
-		GameObject::currentInventoryItemIndex = 1;
-	else
-		GameObject::currentInventoryItemIndex--;
-}
-
-void GameObject::inventoryMoveSelectionDown()
-{
-	if (GameObject::currentInventoryItemIndex >= GameObject::player.getWeaponInventory()->size())
-		GameObject::currentInventoryItemIndex = GameObject::player.getWeaponInventory()->size();
-	else
-		GameObject::currentInventoryItemIndex++;
-
-}
+*/

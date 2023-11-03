@@ -2,22 +2,9 @@
 
 
 TODO:
-- Replace txt files with XML files
-		- Will need to download third party library
-		- Can be used to store everything from the game- Items, Enemies, Anything. 
-- Add formatter class to simplify display function
-	- Ex:	PrintMenuTitle(currentMenu);
-			PrintMenuOption(option);
-			PrintMenuOption(option, 1); // inserts one extra tab before number when printing
-			PrintMenuOption(option);
-	- Goals:
-		- Auto number increment
-		- Pass in title of current menu and current options, automatically centered on display
-		- PrintHud() function might be nice.
 - Start adding savegame files
 	- check for save file .txt
 		- if found, load current relevant variables
 		- if not found, create new save file
 - Add Armor
 - Add an action result message display to GUI at bottom of screen
-- Cap inventory

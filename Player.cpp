@@ -3,14 +3,14 @@
 // Must be called after all components have been initialized
 void Player::setup()
 {
-	fistWeapon_ = (new Weapon("Fists", "none"))->setDamage((float)getLevel() * FIST_DAMAGE_MULTIPLIER);
-	fistWeapon_->setRarity("none");
+	fistWeapon_ = (new Weapon(L"Fists", L"none"))->setDamage((float)getLevel() * FIST_DAMAGE_MULTIPLIER);
 	currentWeapon_ = fistWeapon_;
 	return;
 }
 
 Player* Player::updateGoldAmount(int amt)
 {
+	
 	if ((goldAmount_ + amt) < 0)
 		goldAmount_ = 0;
 	else
@@ -21,7 +21,7 @@ Player* Player::updateGoldAmount(int amt)
 }
 Player* Player::setGoldAmount(int amt)
 {
-
+	
 	if (amt > goldAmount_)
 		goldCollected_ += (long long)(amt - (long long)goldAmount_);
 
@@ -34,6 +34,7 @@ Player* Player::setGoldAmount(int amt)
 
 Player* Player::addExperience(long long n)
 {
+	
 	experience_ += n;
 	lifetimeExperience_ += n;
 	updateLevel();
@@ -54,6 +55,7 @@ void Player::updateLevel()
 	{
 		while (experience_ > experienceCurve())
 		{
+			
 			levelUp();
 			fistWeapon_->setDamage(getLevel() * FIST_DAMAGE_MULTIPLIER);
 			experience_ -= experienceCurve();
@@ -74,6 +76,7 @@ bool Player::isBackpackFull()
 EncounterType Player::explore()
 {
 	timesExplored_++;
+
 	int roll = Random::rand_int(0, 100);
 	EncounterType encounterType = ET_NOTHING;
 
@@ -81,7 +84,7 @@ EncounterType Player::explore()
 		encounterType = ET_BATTLE;
 	else
 		encounterType = ET_NOTHING;
-
+	
 	return encounterType;
 }
 
@@ -137,6 +140,8 @@ float Player::getAttackDamage()
 
 float Player::takeDamage(float dmg)
 {
+	
+
 	updateHealth(-dmg);
 	damageTaken_ += dmg;
 	return getHealth();
